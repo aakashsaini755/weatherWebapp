@@ -5,7 +5,7 @@ const homeFile = fs.readFileSync("home.html", "utf-8");
 
 const replaceVal = (tempVal, orgVal) => {
   let temperature = tempVal.replace("{%tempval%}", orgVal.main.temp);
-  temperature = temperature.replace("{%tempmin%}", orgVal.main.temp_min);
+  temperature = temperature.replace("{%humdity%}", orgVal.main.humidity);
   temperature = temperature.replace("{%tempmax%}", orgVal.main.temp_max);
   temperature = temperature.replace("{%location%}", orgVal.name);
   temperature = temperature.replace("{%country%}", orgVal.sys.country);
@@ -15,7 +15,7 @@ const replaceVal = (tempVal, orgVal) => {
 const server = http.createServer((req, res) => {
   if (req.url == "/") {
     requests(
-      "https://api.openweathermap.org/data/2.5/weather?q=rohtak&appid=5cb9be259f672ab72fb56557ec99f462&units=metric"
+      "https://api.openweathermap.org/data/2.5/weather?q=Rohtak&appid=5cb9be259f672ab72fb56557ec99f462&units=metric"
     )
       .on("data", (chunk) => {
         const objdata = JSON.parse(chunk);
